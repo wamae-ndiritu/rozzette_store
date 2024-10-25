@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Bell, ChevronDown, ShoppingCart } from "lucide-react";
+import NotificationSheet from "./NotificationSheet";
 
 const TopBar = () => {
   return (
@@ -21,19 +22,21 @@ const TopBar = () => {
           </h1>
         </div>
         <div className='flex items-center'>
-          <div className="flex">
+          <div className='flex'>
             <div className='mx-2 h-8 w-8 flex justify-center items-center bg-slate-200 rounded-full relative'>
               <ShoppingCart size={18} />
               <h4 className='h-5 w-5 flex justify-center items-center text-xs font-semibold bg-red-500 rounded-full text-white absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'>
                 0
               </h4>
             </div>
-            <div className='mx-2 h-8 w-8 flex justify-center items-center bg-slate-200 rounded-full relative'>
-              <Bell size={18} />
-              <h4 className='h-5 w-5 flex justify-center items-center text-xs font-semibold bg-red-500 rounded-full text-white absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'>
-                0
-              </h4>
-            </div>
+            <NotificationSheet>
+              <div className='mx-2 h-8 w-8 flex justify-center items-center bg-slate-200 rounded-full relative'>
+                <Bell size={18} />
+                <h4 className='h-5 w-5 flex justify-center items-center text-xs font-semibold bg-red-500 rounded-full text-white absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'>
+                  0
+                </h4>
+              </div>
+            </NotificationSheet>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
