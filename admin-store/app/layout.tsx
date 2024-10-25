@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import TopBar from "@/components/TopBar";
 
 export const metadata: Metadata = {
   title: "Rozzette Store Dashboard",
@@ -15,12 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-      >
+      <body className='flex'>
         <SidebarProvider>
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
+          <main className='flex-grow min-h-screen'>
+            <TopBar />
             {children}
           </main>
         </SidebarProvider>
