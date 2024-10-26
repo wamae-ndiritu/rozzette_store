@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className='flex'>
         <SidebarProvider>
           <AppSidebar />
-          <main className='flex-grow min-h-screen'>
+          <main className='flex-grow min-h-screen md:px-4 py-2'>
             <TopBar />
             {children}
           </main>

@@ -14,7 +14,7 @@ import {
 
 const SalesChart = ({ data }: { data: { name: string; sales: number }[] }) => {
   return (
-    <Card className='w-full my-3'>
+    <Card className='w-full'>
       <CardHeader>
         <CardTitle>Sales Overview</CardTitle>
       </CardHeader>

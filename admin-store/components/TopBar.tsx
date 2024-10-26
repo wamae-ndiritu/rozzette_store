@@ -13,7 +13,7 @@ import NotificationSheet from "./NotificationSheet";
 
 const TopBar = () => {
   return (
-    <div className='p-2'>
+    <div className=''>
       <Menubar className='flex h-auto justify-between py-2 px-4'>
         <div className='flex gap-2 items-center'>
           <SidebarTrigger />

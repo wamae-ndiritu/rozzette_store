@@ -44,8 +44,8 @@ export default function Home() {
     { month: "Apr", revenue: 800 },
   ];
   return (
-    <div className='p-4 text-white'>
-      <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4'>
+    <div className='text-white'>
+      <div className='grid grid-cols-1 gap-4 my-3 md:grid-cols-3 lg:grid-cols-4'>
         <DashStatsCard
           icon={ShoppingCart}
           title='Total Sales'
@@ -72,10 +72,10 @@ export default function Home() {
           title='Revenue Growth'
           description='Increase in revenue.'
           color='#9C27B0'
-          action={<p className='text-white font-semibold'>$5,300</p>}
+          action={<p className='text-white font-semibold'>KES 5,300</p>}
         />
       </div>
-      <div className='p-4 grid grid-cols-1 gap-4 lg:grid-cols-2'>
+      <div className='p-4 grid grid-cols-1 space-y-4 lg:space-y-4 lg:gap-4 lg:grid-cols-2'>
         <SalesChart data={sampleData} />
         <RevenueBarChart data={revenueData} />
         <UserDemographicsPieChart data={demographicsData} />
