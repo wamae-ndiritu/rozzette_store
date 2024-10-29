@@ -1,6 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 import { errorMiddleware } from './middlewares/errors.js';
 import { userRoutes } from "./routes/index.js"
+import dontenv from "dotenv";
+
+dontenv.config();
 
 const app: Application = express();
 const port: number = 5000;

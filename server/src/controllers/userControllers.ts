@@ -47,7 +47,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 
 // Login user
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response, next: NextFunction) => {
   const {email, password} = req.body;
 
   const existingUser = await prisma.user.findUnique({where: {email}});
@@ -64,4 +64,16 @@ export const login = async (req: Request, res: Response) => {
   const token = generateToken(existingUser.id);
 
     res.status(201).json({ user: existingUser, token });
+}
+
+export const getProfile = async (req: Request, res: Response) => {
+  const userInfo = await prisma.user.findFirst({
+    where: { id: req.user.id },
+    include: {
+      addresses: true,
+      roles: true,
+    },
+  });
+  // const selectedInfo = exclude()
+  res.status(200).json(userInfo);
 }
