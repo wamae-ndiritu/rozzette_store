@@ -9,7 +9,6 @@ import {
   SortingState,
   flexRender,
 } from "@tanstack/react-table";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ordersData } from "@/app/ordersData";
 
 type Order = {
@@ -32,6 +31,11 @@ const OrdersTable = () => {
     {
       accessorKey: "customer",
       header: "Customer",
+      enableSorting: true,
+    },
+    {
+      accessorKey: "email",
+      header: "Email",
       enableSorting: true,
     },
     {
