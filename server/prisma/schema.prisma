@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id          Int       @id @default(autoincrement())
   email       String    @unique
@@ -19,6 +18,7 @@ model User {
   roles       Role[]    @relation("UserRoles")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  notifications Notification[] @relation("UserNotifications")
 
   @@map("users")
 }
@@ -31,12 +31,16 @@ model Address {
   zipCode   String
   user      User   @relation(fields: [userId], references: [id])
   userId    Int
+
+  @@map("addresses")
 }
 
 model Role {
   id       Int      @id @default(autoincrement())
   roleName RoleName @unique
   users    User[]   @relation("UserRoles")
+
+  @@map("roles")
 }
 
 enum RoleName {
@@ -46,16 +50,57 @@ enum RoleName {
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   name        String
   description String
   price       Float
   quantity    Int
-  tags       String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  tags        String
+  images      ProductImage[]
+  published   Boolean   @default(false)
+  categories  Category[]   @relation("ProductCategories")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@map("products")
 }
 
+model ProductImage {
+  id        Int     @id @default(autoincrement())
+  url       String
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
 
+  @@map("product_images")
+}
+
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  image       String
+  products    Product[]  @relation("ProductCategories")
+
+  @@map("categories")
+}
+
+model Notification {
+  id          Int        @id @default(autoincrement())
+  message     String
+  eventType   EventType
+  createdAt   DateTime   @default(now())
+  user        User       @relation("UserNotifications", fields: [userId], references: [id])
+  userId      Int
+
+  @@map("notifications")
+}
+
+enum EventType {
+  PRODUCT_CREATED
+  PRODUCT_UPDATED
+  PRODUCT_DELETED
+  PRODUCT_PUBLISHED
+  USER_CREATED
+  USER_UPDATED
+  USER_DELETED
+}

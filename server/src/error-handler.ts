@@ -4,8 +4,14 @@ import { InternalException } from "./exceptions/InternalException.js";
 import { BadRequestsException } from "./exceptions/BadRequest.js";
 import { ZodError } from "zod";
 
-export const errorHandler = (method: Function) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+type AsyncHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => Promise<void>;
+
+export const errorHandler = (method: AsyncHandler): AsyncHandler => {
+  return async (req: Request, res: Response, next: NextFunction) =>  {
     try {
       await method(req, res, next);
     } catch (error: any) {
@@ -16,7 +22,8 @@ export const errorHandler = (method: Function) => {
         if (error instanceof ZodError) {
           exception = new BadRequestsException(
             "Unprocessable entity.",
-            ErrorCode.UPROCESSABLE_ENTITY
+            ErrorCode.UPROCESSABLE_ENTITY,
+            error.errors
           );
         } else {
           exception = new InternalException(
