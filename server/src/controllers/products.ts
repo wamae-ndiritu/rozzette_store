@@ -7,7 +7,7 @@ export const createProduct = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, description, price, quantity, tags, images, categories } =
+  const { name, description, price, countInStock, tags, images, categories } =
     req.body;
   const userId = req.user?.id; // Get user id from request
 
@@ -17,7 +17,7 @@ export const createProduct = async (
       name,
       description,
       price,
-      quantity,
+      countInStock,
       tags: tags.join(","),
       images,
       published: false,

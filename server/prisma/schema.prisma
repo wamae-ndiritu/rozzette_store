@@ -54,7 +54,7 @@ model Product {
   name        String
   description String
   price       Float
-  quantity    Int
+  countInStock    Int
   tags        String
   images      ProductImage[]
   published   Boolean   @default(false)
@@ -79,6 +79,7 @@ model Category {
   name        String     @unique
   description String?
   image       String
+  published Boolean  @default(false)
   products    Product[]  @relation("ProductCategories")
 
   @@map("categories")
@@ -88,6 +89,7 @@ model Notification {
   id          Int        @id @default(autoincrement())
   message     String
   eventType   EventType
+  read        Boolean   @default(false)
   createdAt   DateTime   @default(now())
   user        User       @relation("UserNotifications", fields: [userId], references: [id])
   userId      Int
@@ -100,6 +102,7 @@ enum EventType {
   PRODUCT_UPDATED
   PRODUCT_DELETED
   PRODUCT_PUBLISHED
+  CATEGORY_PUBLISHED
   USER_CREATED
   USER_UPDATED
   USER_DELETED

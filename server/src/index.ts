@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import { errorMiddleware } from './middlewares/errors.js';
-import { productRoutes, userRoutes } from "./routes/index.js"
+import { categoryRoutes, productRoutes, userRoutes } from "./routes/index.js"
 import dontenv from "dotenv";
 
 dontenv.config();
@@ -12,6 +12,7 @@ app.use(express.json())
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/categories", categoryRoutes);
 
 app.use(errorMiddleware); // Error middleware
 
