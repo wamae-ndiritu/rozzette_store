@@ -21,7 +21,9 @@ export const authMiddleware = async (
   try {
     const payload = jwt.verify(token, JWT_SECRET) as any;
     const user = await prisma.user.findFirst({ where: { id: payload.userId } });
-    if (user) {
+    if (!user) {
+      next(new UnauthorizedException("Unauthorized", ErrorCode.UNAUTHORIZED));
+    }else{
       req.user = user;
     }
     next();
