@@ -15,14 +15,16 @@ export const errorHandler = (method: Function) => {
       } else {
         if (error instanceof ZodError) {
           exception = new BadRequestsException(
-            "Unprocessable entity.", ErrorCode.UPROCESSABLE_ENTITY,
-          )
+            "Unprocessable entity.",
+            ErrorCode.UPROCESSABLE_ENTITY
+          );
+        } else {
+          exception = new InternalException(
+            "Something went wrong!",
+            error,
+            ErrorCode.INTERNAL_EXCEPTION
+          );
         }
-        exception = new InternalException(
-          "Something went wrong!",
-          error,
-          ErrorCode.INTERNAL_EXCEPTION
-        );
       }
       next(exception);
     }
